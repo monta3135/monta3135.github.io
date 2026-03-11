@@ -1,0 +1,23 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About" description="このブログについて">
+  <article class="prose">
+    <h1>About</h1>
+    <p>こんにちは。montaです。</p>
+    <p>
+      このブログは <a href="https://astro.build">Astro</a> と{" "}
+      <a href="https://bun.sh">Bun</a> で構築しています。
+      技術的な話題や日常のメモを書いていきます。
+    </p>
+
+    <h2>技術スタック</h2>
+    <ul>
+      <li>Framework: <strong>Astro</strong></li>
+      <li>Runtime / Package Manager: <strong>Bun</strong></li>
+      <li>Content: <strong>MDX + Content Collections</strong></li>
+      <li>Hosting: <strong>GitHub Pages</strong></li>
+    </ul>
+  </article>
+</BaseLayout>

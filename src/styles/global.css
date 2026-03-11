@@ -1,0 +1,285 @@
+/* ============================================================
+   Global Styles — Vanilla CSS
+   "Freeze everything" philosophy: fonts bundled via @fontsource-variable
+   ============================================================ */
+
+/* --- Font imports (bundled, no external requests) --- */
+@import "@fontsource-variable/noto-sans-jp";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/400-italic.css";
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Typography */
+  --font-sans: "Noto Sans JP Variable", "Hiragino Sans", "Yu Gothic",
+    sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* Layout */
+  --content-width: 720px;
+  --header-height: 3.5rem;
+
+  /* Light mode colors */
+  --bg: #fafaf9;
+  --bg-secondary: #f5f5f4;
+  --text: #1c1917;
+  --text-muted: #78716c;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --border: #e7e5e4;
+  --code-bg: #f8f8f8;
+  --tag-bg: #e7e5e4;
+  --tag-text: #44403c;
+
+  /* Transitions */
+  --transition: 150ms ease;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09;
+    --bg-secondary: #1c1917;
+    --text: #fafaf9;
+    --text-muted: #a8a29e;
+    --accent: #60a5fa;
+    --accent-hover: #93c5fd;
+    --border: #292524;
+    --code-bg: #161412;
+    --tag-bg: #1c1917;
+    --tag-text: #d6d3d1;
+  }
+}
+
+/* --- Reset / Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--text);
+  background-color: var(--bg);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* --- Links --- */
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* --- Images --- */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Code --- */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background-color: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  padding: 0.1em 0.35em;
+}
+
+pre {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  padding: var(--spacing-md);
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--text-sm);
+}
+
+/* --- Headings --- */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* --- Layout Utilities --- */
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--spacing-lg);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* --- Prose styles (for blog posts) --- */
+.prose {
+  color: var(--text);
+  line-height: 1.85;
+}
+
+.prose h1 {
+  font-size: var(--text-2xl);
+  margin-top: var(--spacing-2xl);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+.prose h2 {
+  font-size: var(--text-xl);
+  margin-top: var(--spacing-2xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.prose h3 {
+  font-size: var(--text-lg);
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-sm);
+}
+
+.prose p {
+  margin-bottom: var(--spacing-md);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.prose li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: var(--spacing-md);
+  margin-left: 0;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--spacing-2xl) 0;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--text-sm);
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-align: left;
+}
+
+.prose th {
+  background-color: var(--bg-secondary);
+  font-weight: 600;
+}
+
+/* --- Heading link anchors --- */
+.heading-link {
+  margin-left: 0.4em;
+  opacity: 0;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.8em;
+  transition: opacity var(--transition);
+}
+
+h1:hover .heading-link,
+h2:hover .heading-link,
+h3:hover .heading-link,
+h4:hover .heading-link {
+  opacity: 1;
+}
+
+/* --- Tags --- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0.2em 0.6em;
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+  border-radius: 0.25rem;
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  text-decoration: none;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.tag:hover {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+/* --- Expressive Code overrides --- */
+.expressive-code {
+  margin-bottom: var(--spacing-md);
+}

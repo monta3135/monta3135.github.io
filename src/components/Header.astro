@@ -1,0 +1,87 @@
+---
+const base = import.meta.env.BASE_URL;
+const navLinks = [
+  { href: base, label: "Home" },
+  { href: `${base}about`, label: "About" },
+];
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href={base} class="site-title">monta's blog</a>
+    <nav class="nav" aria-label="メインナビゲーション">
+      <ul class="nav-list">
+        {
+          navLinks.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class:list={[
+                  "nav-link",
+                  { active: currentPath === href || (href !== base && currentPath.startsWith(href)) },
+                ]}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--border);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    background-color: color-mix(in srgb, var(--bg) 85%, transparent);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-title {
+    font-size: var(--text-base);
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    transition: color var(--transition);
+  }
+
+  .site-title:hover {
+    color: var(--accent);
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: var(--spacing-lg);
+  }
+
+  .nav-link {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--text);
+  }
+</style>

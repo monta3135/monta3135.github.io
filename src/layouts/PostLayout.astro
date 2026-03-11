@@ -1,0 +1,103 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "./BaseLayout.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, categories } = post.data;
+---
+
+<BaseLayout title={title} description={description} ogType="article">
+  <article>
+    <header class="post-header">
+      <div class="post-meta">
+        <FormattedDate date={pubDate} />
+        {
+          updatedDate && (
+            <span class="updated-date">
+              — <FormattedDate date={updatedDate} /> 更新
+            </span>
+          )
+        }
+      </div>
+
+      <h1 class="post-title">{title}</h1>
+
+      {
+        categories.length > 0 && (
+          <div class="post-categories">
+            {categories.map((cat) => (
+              <span class="tag">{cat}</span>
+            ))}
+          </div>
+        )
+      }
+    </header>
+
+    <div class="prose post-body">
+      <slot />
+    </div>
+
+    <footer class="post-footer">
+      <a href={`${import.meta.env.BASE_URL}`}>← 一覧へ戻る</a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-meta {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-bottom: 0.75rem;
+  }
+
+  .updated-date {
+    margin-left: 0.25rem;
+  }
+
+  .post-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .post-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  .post-body {
+    margin-top: 2rem;
+  }
+
+  .post-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: var(--text-sm);
+  }
+
+  .post-footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .post-footer a:hover {
+    color: var(--accent);
+  }
+</style>

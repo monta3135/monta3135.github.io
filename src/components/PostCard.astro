@@ -1,0 +1,105 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, categories } = post.data;
+const href = `${import.meta.env.BASE_URL}posts/${post.id}`;
+---
+
+<article class="post-card">
+  <a href={href} class="post-card-link" aria-label={title}>
+    <div class="post-card-inner">
+      <div class="post-card-meta">
+        <FormattedDate date={pubDate} />
+        {updatedDate && <span class="post-card-updated">更新</span>}
+      </div>
+      <h2 class="post-card-title">{title}</h2>
+      <p class="post-card-desc">{description}</p>
+      {
+        categories.length > 0 && (
+          <div class="post-card-tags">
+            {categories.map((cat) => (
+              <span class="tag">{cat}</span>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </a>
+</article>
+
+<style>
+  .post-card {
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    transition: border-color var(--transition), transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .post-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+
+  .post-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: var(--spacing-lg);
+  }
+
+  .post-card-meta {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .post-card-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text);
+    transition: color var(--transition);
+  }
+
+  .post-card:hover .post-card-title {
+    color: var(--accent);
+  }
+
+  .post-card-desc {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: var(--spacing-sm);
+  }
+
+  .post-card-updated {
+    background-color: var(--accent);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 0.1em 0.4em;
+    border-radius: 0.2rem;
+  }
+</style>
