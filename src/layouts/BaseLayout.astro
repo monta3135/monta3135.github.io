@@ -30,13 +30,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
 
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={description || "monta のブログ"} />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={description || "monta のブログ"} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:site_name" content={siteTitle} />
     <meta property="og:image" content={ogImage} />
@@ -44,7 +44,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:domain" content={canonicalURL.hostname} />
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={description || "monta のブログ"} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:site" content="@monta3135" />
     <meta name="twitter:creator" content="@monta3135" />
