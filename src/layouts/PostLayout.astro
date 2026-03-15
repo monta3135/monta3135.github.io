@@ -17,7 +17,13 @@ const ogImageURL = new URL(
 ).toString();
 ---
 
-<BaseLayout title={title} description={description} ogType="article" ogImage={ogImageURL}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  ogImage={ogImageURL}
+  ogImageAlt={title}
+>
   <article>
     <header class="post-header">
       <div class="post-meta">
