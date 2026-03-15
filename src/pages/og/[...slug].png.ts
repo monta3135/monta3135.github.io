@@ -38,7 +38,7 @@ export async function GET({ props }: { props: any }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#fafaf9",
+        backgroundColor: "#ffffff",
         fontFamily: "'Noto Sans JP'",
         padding: "40px 80px",
         border: "16px solid #2563eb",
@@ -101,6 +101,7 @@ export async function GET({ props }: { props: any }) {
 
   // Convert SVG to PNG with Resvg
   const resvg = new Resvg(svg, {
+    background: "#ffffff",
     fitTo: {
       mode: "width",
       value: 1200,
