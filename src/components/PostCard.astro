@@ -13,29 +13,30 @@ const href = `${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}posts/${post.slu
 ---
 
 <article class="post-card">
-  <a href={href} class="post-card-link" aria-label={title}>
-    <div class="post-card-inner">
-      <div class="post-card-meta">
-        <FormattedDate date={pubDate} />
-        {updatedDate && <span class="post-card-updated">更新</span>}
-      </div>
-      <h2 class="post-card-title">{title}</h2>
-      <p class="post-card-desc">{description}</p>
-      {
-        categories.length > 0 && (
-          <div class="post-card-tags">
-            {categories.map((cat) => (
-              <span class="tag">{cat}</span>
-            ))}
-          </div>
-        )
-      }
+  <div class="post-card-inner">
+    <div class="post-card-meta">
+      <FormattedDate date={pubDate} />
+      {updatedDate && <span class="post-card-updated">更新</span>}
     </div>
-  </a>
+    <h2 class="post-card-title">
+      <a href={href} class="post-card-link-title" aria-label={title}>{title}</a>
+    </h2>
+    <p class="post-card-desc">{description}</p>
+    {
+      categories.length > 0 && (
+        <div class="post-card-tags">
+          {categories.map((cat) => (
+            <a href={`${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}categories/${cat}`} class="tag post-card-tag">{cat}</a>
+          ))}
+        </div>
+      )
+    }
+  </div>
 </article>
 
 <style>
   .post-card {
+    position: relative;
     border: 1px solid var(--border);
     border-radius: 0.5rem;
     transition: border-color var(--transition), transform var(--transition),
@@ -48,11 +49,23 @@ const href = `${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}posts/${post.slu
     box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent);
   }
 
-  .post-card-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
+  .post-card-inner {
     padding: var(--spacing-lg);
+  }
+
+  .post-card-link-title {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .post-card-link-title::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
   }
 
   .post-card-meta {
@@ -94,6 +107,11 @@ const href = `${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}posts/${post.slu
     flex-wrap: wrap;
     gap: 0.35rem;
     margin-top: var(--spacing-sm);
+  }
+
+  .post-card-tag {
+    position: relative;
+    z-index: 2;
   }
 
   .post-card-updated {
