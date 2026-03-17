@@ -10,7 +10,7 @@ export async function GET(context: APIContext) {
 
     return rss({
         title: "monta's blog",
-        description: "monta のブログ — 技術・日常・思考メモ",
+        description: "monta のブログ",
         site: context.site!,
         items: sortedPosts.map((post) => ({
             title: post.data.title,

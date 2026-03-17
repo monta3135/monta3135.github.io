@@ -1,23 +1,40 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import "../styles/global.css";
+import FormattedDate from "../components/FormattedDate.astro";
 ---
 
 <BaseLayout title="About" description="このブログについて">
   <article class="prose">
-    <h1>About</h1>
-    <p>こんにちは。montaです。</p>
-    <p>
-      このブログは <a href="https://astro.build">Astro</a> と{" "}
-      <a href="https://bun.sh">Bun</a> で構築しています。
-      技術的な話題や日常のメモを書いていきます。
-    </p>
+    <h1>Profile</h1>
 
-    <h2>技術スタック</h2>
+    <section class="not-prose">
+      <div class="flex items-center gap-4">
+        <img
+          src="src/assets/favicon.jpg"
+          alt="monta3135 profile image"
+          class="h-24 w-24 rounded-full object-cover"
+        />
+        <p class="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">monta3135</p>
+        <FormattedDate date={new Date()} />
+      </div>
+
+      <div class="mt-3 flex gap-4 text-sm">
+        <a href="https://twitter.com/monta3135" class="underline hover:no-underline">Twitter</a>
+        <a href="https://github.com/monta3135" class="underline hover:no-underline">GitHub</a>
+      </div>
+    </section>
+
+    <h2>制作物</h2>
     <ul>
-      <li>Framework: <strong>Astro</strong></li>
-      <li>Runtime / Package Manager: <strong>Bun</strong></li>
-      <li>Content: <strong>MDX + Content Collections</strong></li>
-      <li>Hosting: <strong>GitHub Pages</strong></li>
+      <li>TCP/IPプロトコルスタック自作</li>
+    </ul>
+
+    <h2>Skill</h2>
+    <ul>
+      <li>C</li>
+      <li>Rust</li>
+      <li>TOEIC L&R: L: 405 + R: 400 = 805 (July 30, 2025)</li>
     </ul>
   </article>
 </BaseLayout>
