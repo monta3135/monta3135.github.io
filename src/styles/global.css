@@ -3,6 +3,10 @@
    "Freeze everything" philosophy: fonts bundled via @fontsource-variable
    ============================================================ */
 
+/* Tailwind utilities (without preflight reset) */
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+
 /* --- Font imports (bundled, no external requests) --- */
 @import "@fontsource-variable/noto-sans-jp";
 @import "@fontsource/jetbrains-mono/400.css";

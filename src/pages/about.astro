@@ -1,40 +1,76 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import "../styles/global.css";
+import profileImage from "@/assets/favicon.jpg";
 import FormattedDate from "../components/FormattedDate.astro";
+
+const birthDate = new Date("2005-02-10");
 ---
 
 <BaseLayout title="About" description="このブログについて">
-  <article class="prose">
+  <article class="prose max-w-none">
     <h1>Profile</h1>
 
-    <section class="not-prose">
-      <div class="flex items-center gap-4">
-        <img
-          src="src/assets/favicon.jpg"
-          alt="monta3135 profile image"
-          class="h-24 w-24 rounded-full object-cover"
-        />
-        <p class="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">monta3135</p>
-        <FormattedDate date={new Date()} />
+    <section class="not-prose mt-8 space-y-8">
+      <div class="overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm transition-all hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/50">
+        <div class="p-8 sm:flex sm:items-start sm:gap-8">
+          <div class="shrink-0">
+            <img
+              src={profileImage.src}
+              alt="monta3135's profile image"
+              class="mx-auto h-32 w-32 rounded-full object-cover shadow-sm ring-1 ring-zinc-200 sm:mx-0 sm:h-40 sm:w-40 dark:ring-zinc-700"
+            />
+          </div>
+
+          <div class="mt-6 text-center sm:mt-0 sm:text-left">
+            <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+              monta3135
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+              Hi! I’m monta (<FormattedDate date={birthDate} format="age" />). I'm a second-year undergraduate student at Kansai University majoring in Computer Science.
+            </p>
+
+            <div class="mt-6 flex flex-wrap justify-center gap-4 sm:justify-start">
+              <a
+                href="https://twitter.com/monta3135"
+                class="inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+              >
+                Twitter
+              </a>
+              <a
+                href="https://github.com/monta3135"
+                class="inline-flex items-center justify-center rounded-full border border-zinc-200 bg-white px-6 py-2.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="mt-3 flex gap-4 text-sm">
-        <a href="https://twitter.com/monta3135" class="underline hover:no-underline">Twitter</a>
-        <a href="https://github.com/monta3135" class="underline hover:no-underline">GitHub</a>
+      <div class="grid gap-6 md:grid-cols-2">
+        <section class="rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm transition-all hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/50">
+          <h3 class="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Projects</h3>
+          <ul class="mt-5 space-y-3">
+            <li class="group flex items-center gap-3 rounded-2xl bg-zinc-50 p-4 transition-colors hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800">
+              <div class="h-2 w-2 shrink-0 rounded-full bg-blue-500"></div>
+              <span class="text-sm font-medium text-zinc-700 dark:text-zinc-300">TCP/IPプロトコルスタック自作</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm transition-all hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/50">
+          <h3 class="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Skills</h3>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-300">
+              C
+            </span>
+            <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-300">
+              TOEIC L&R: 805
+            </span>
+          </div>
+        </section>
       </div>
     </section>
-
-    <h2>制作物</h2>
-    <ul>
-      <li>TCP/IPプロトコルスタック自作</li>
-    </ul>
-
-    <h2>Skill</h2>
-    <ul>
-      <li>C</li>
-      <li>Rust</li>
-      <li>TOEIC L&R: L: 405 + R: 400 = 805 (July 30, 2025)</li>
-    </ul>
   </article>
 </BaseLayout>

@@ -1,9 +1,10 @@
 ---
 interface Props {
   date: Date;
+  format?: "date" | "age";
 }
 
-const { date } = Astro.props;
+const { date, format = "date" } = Astro.props;
 
 const formatted = date.toLocaleDateString("ja-JP", {
   year: "numeric",
@@ -12,6 +13,17 @@ const formatted = date.toLocaleDateString("ja-JP", {
 });
 
 const iso = date.toISOString();
+
+const now = new Date();
+const birthdayPassedThisYear =
+  now.getMonth() > date.getMonth() ||
+  (now.getMonth() === date.getMonth() && now.getDate() >= date.getDate());
+const yearsOld = Math.max(
+  0,
+  now.getFullYear() - date.getFullYear() - (birthdayPassedThisYear ? 0 : 1),
+);
 ---
 
-<time datetime={iso}>{formatted}</time>
+<time datetime={iso}>
+  {format === "age" ? `${yearsOld} years old` : formatted}
+</time>
