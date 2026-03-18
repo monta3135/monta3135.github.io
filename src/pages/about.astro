@@ -12,8 +12,8 @@ const birthDate = new Date("2005-02-10");
     <h1>Profile</h1>
 
     <section class="not-prose mt-8 space-y-8">
-      <div class="overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm transition-all hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/50">
-        <div class="p-8 sm:flex sm:items-start sm:gap-8">
+      <div class="profile-card">
+        <div class="profile-card-inner sm:flex sm:items-start sm:gap-8">
           <div class="shrink-0">
             <img
               src={profileImage.src}
@@ -23,7 +23,7 @@ const birthDate = new Date("2005-02-10");
           </div>
 
           <div class="mt-6 text-center sm:mt-0 sm:text-left">
-            <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+            <h2 class="profile-card-title text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
               monta3135
             </h2>
             <p class="mt-4 text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
@@ -74,3 +74,30 @@ const birthDate = new Date("2005-02-10");
     </section>
   </article>
 </BaseLayout>
+
+<style>
+  .profile-card {
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    transition: border-color var(--transition), transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .profile-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+
+  .profile-card-inner {
+    padding: var(--spacing-xl);
+  }
+
+  .profile-card-title {
+    transition: color var(--transition);
+  }
+
+  .profile-card:hover .profile-card-title {
+    color: var(--accent);
+  }
+</style>
