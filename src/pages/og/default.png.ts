@@ -2,17 +2,29 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { Resvg } from "@resvg/resvg-js";
 import { loadDefaultJapaneseParser } from "budoux";
+import type { ReactNode } from "react";
 import satori from "satori";
+
+type MarkupElement = {
+  type: string;
+  props: {
+    style: Record<string, string | number>;
+    children?: MarkupElement | string | Array<MarkupElement | string>;
+  };
+};
 
 const parser = loadDefaultJapaneseParser();
 
-const fontPath = path.resolve(process.cwd(), "src/assets/fonts/NotoSansJP-Bold.ttf");
+const fontPath = path.resolve(
+  process.cwd(),
+  "src/assets/fonts/NotoSansJP-Bold.ttf",
+);
 const fontData = await fs.readFile(fontPath);
 
 export async function GET() {
   const words = parser.parse("monta's blog");
 
-  const markup = {
+  const markup: MarkupElement = {
     type: "div",
     props: {
       style: {
@@ -55,7 +67,7 @@ export async function GET() {
     },
   };
 
-  const svg = await satori(markup as any, {
+  const svg = await satori(markup as unknown as ReactNode, {
     width: 1200,
     height: 630,
     fonts: [

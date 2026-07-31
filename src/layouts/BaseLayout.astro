@@ -1,7 +1,7 @@
 ---
 import "@/styles/global.css";
-import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
 
 interface Props {
   title: string;
@@ -53,8 +53,8 @@ const normalizedOgImage = new URL(ogImage, Astro.site).toString();
     <meta property="og:image" content={normalizedOgImage} />
     <meta property="og:image:secure_url" content={normalizedOgImage} />
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content={ogImageWidth} />
-    <meta property="og:image:height" content={ogImageHeight} />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
     <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:domain" content={canonicalURL.hostname} />

@@ -26,7 +26,7 @@ const minTocDepth = hasToc
 
 // Generate the URL for the static OG image endpoint
 const ogImageURL = new URL(
-  `${baseUrl}og/${post.slug}.png`,
+  `${baseUrl}og/${post.id}.png`,
   Astro.site,
 ).toString();
 ---
