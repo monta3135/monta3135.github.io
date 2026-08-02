@@ -1,84 +1,90 @@
 ---
-import { getCollection } from "astro:content";
-import PostCard from "@/components/PostCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import profileImage from "@/assets/favicon.jpg";
+import FormattedDate from "../components/FormattedDate.astro";
 
-const allPosts = await getCollection("blog", ({ data }) => !data.draft);
-const posts = allPosts.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const birthDate = new Date("2005-02-10");
 ---
 
-<BaseLayout title="monta's blog" description="monta のブログ">
-  <div class="home">
-    <section class="hero">
-      <h1 class="hero-title">Articles</h1>
-    </section>
+<BaseLayout title="Profile" description="monta3135 について">
+  <article class="prose max-w-none">
+    <h1>Profile</h1>
 
-    <section class="posts-section" aria-label="記事一覧">
-      {posts.length === 0 ? (
-        <p class="empty-state">記事がまだありません。</p>
-      ) : (
-        <ul class="post-list">
-          {posts.map((post) => (
-            <li>
-              <PostCard post={post} />
-            </li>
-          ))}
-        </ul>
-      )}
+    <section class="not-prose mt-8 space-y-8">
+      <div class="profile-card">
+        <div class="profile-card-inner sm:flex sm:items-start sm:gap-8">
+          <div class="shrink-0">
+            <img
+              src={profileImage.src}
+              alt="monta3135's profile image"
+              class="mx-auto h-32 w-32 rounded-full object-cover shadow-sm ring-1 ring-zinc-200 sm:mx-0 sm:h-40 sm:w-40 dark:ring-zinc-700"
+            />
+          </div>
+
+          <div class="mt-6 text-center sm:mt-0 sm:text-left">
+            <h2 class="profile-card-title text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+              monta3135
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+              Hi! I’m monta (<FormattedDate date={birthDate} format="age" />). I'm a second-year undergraduate student at Kansai University majoring in Computer Science.
+            </p>
+
+            <div class="mt-6 flex flex-wrap justify-center gap-4 sm:justify-start">
+              <a
+                href="https://twitter.com/monta3135"
+                class="inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+              >
+                Twitter
+              </a>
+              <a
+                href="https://github.com/monta3135"
+                class="inline-flex items-center justify-center rounded-full border border-zinc-200 bg-white px-6 py-2.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm transition-all hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/50">
+        <h3 class="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Skills</h3>
+        <div class="mt-5 flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-300">
+            C
+          </span>
+          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-300">
+            C++
+          </span>
+        </div>
+      </section>
     </section>
-  </div>
+  </article>
 </BaseLayout>
 
 <style>
-  .home {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+  .profile-card {
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    transition: border-color var(--transition), transform var(--transition),
+      box-shadow var(--transition);
   }
 
-  .hero {
-    padding-block: 2rem;
-    border-bottom: 1px solid var(--border);
+  .profile-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent);
   }
 
-  .hero-title {
-    font-size: clamp(1.75rem, 5vw, 2.5rem);
-    font-family: var(--font-mono);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .profile-card-inner {
+    padding: var(--spacing-xl);
   }
 
-  .hero-desc {
-    color: var(--text-muted);
-    font-size: var(--text-sm);
-    font-family: var(--font-mono);
+  .profile-card-title {
+    transition: color var(--transition);
   }
 
-  .posts-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .post-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .empty-state {
-    color: var(--text-muted);
-    text-align: center;
-    padding: 3rem 0;
-    font-size: var(--text-sm);
-    font-family: var(--font-mono);
+  .profile-card:hover .profile-card-title {
+    color: var(--accent);
   }
 </style>
