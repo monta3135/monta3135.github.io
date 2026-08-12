@@ -24,10 +24,13 @@ typography:
     letterSpacing: "-0.02em"
   mono:
     fontFamily: "JetBrains Mono, Fira Code, Cascadia Code, monospace"
+  profile-title:
+    fontSize: "clamp(2rem, 4vw, 2.75rem)"
 rounded:
   sm: "0.5rem"
   md: "0.75rem"
   lg: "1.5rem"
+  pill: "999px"
 spacing:
   xs: "0.25rem"
   sm: "0.5rem"

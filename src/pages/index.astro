@@ -50,10 +50,10 @@ const birthDate = new Date("2005-02-10");
           </div>
 
           <div class="mt-6 text-center sm:mt-0 sm:text-left">
-            <h2 class="profile-card-title text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+            <h2 class="profile-card-title text-3xl font-bold tracking-tight">
               monta3135
             </h2>
-            <p class="mt-4 text-base leading-relaxed text-zinc-800 dark:text-zinc-200">
+            <p class="profile-card-copy mt-4 text-base leading-relaxed">
               Hi! I’m monta (<FormattedDate date={birthDate} format="age" />). I'm a second-year undergraduate student at Kansai University majoring in Computer Science.
             </p>
 
@@ -76,7 +76,7 @@ const birthDate = new Date("2005-02-10");
       </div>
 
       <section class="skills-card transition-all hover:shadow-md">
-        <h3 class="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Skills</h3>
+        <h3 class="skills-card-title text-lg font-bold tracking-tight">Skills</h3>
         <div class="mt-5 flex flex-wrap items-center gap-2">
           <span class="skill-tag inline-flex items-center px-4 py-2 text-sm font-medium">
             C
@@ -138,7 +138,13 @@ const birthDate = new Date("2005-02-10");
   }
 
   .profile-card-title {
+    color: var(--text);
     transition: color var(--transition);
+  }
+
+  .profile-card-copy,
+  .skills-card-title {
+    color: var(--text);
   }
 
   .profile-card:hover .profile-card-title {
