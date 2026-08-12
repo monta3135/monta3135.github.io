@@ -32,7 +32,7 @@ const birthDate = new Date("2005-02-10");
       }}
     />
 
-    <h1>Profile</h1>
+    <h1 class="profile-page-title">Profile</h1>
 
     <section class="not-prose mt-8 space-y-8">
       <div class="profile-card">
@@ -41,6 +41,10 @@ const birthDate = new Date("2005-02-10");
             <img
               src={profileImage.src}
               alt="monta3135's profile image"
+              width={160}
+              height={160}
+              loading="eager"
+              decoding="async"
               class="mx-auto h-32 w-32 rounded-full object-cover shadow-sm ring-1 ring-zinc-200 sm:mx-0 sm:h-40 sm:w-40 dark:ring-zinc-700"
             />
           </div>
@@ -71,16 +75,16 @@ const birthDate = new Date("2005-02-10");
         </div>
       </div>
 
-      <section class="rounded-3xl border border-zinc-200 bg-white/45 p-8 shadow-sm backdrop-blur-sm transition-all hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/30">
+      <section class="skills-card transition-all hover:shadow-md">
         <h3 class="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Skills</h3>
         <div class="mt-5 flex flex-wrap items-center gap-2">
-          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50/60 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-300">
+          <span class="skill-tag inline-flex items-center px-4 py-2 text-sm font-medium">
             C
           </span>
-          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50/60 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-300">
+          <span class="skill-tag inline-flex items-center px-4 py-2 text-sm font-medium">
             C++
           </span>
-          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50/60 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-300">
+          <span class="skill-tag inline-flex items-center px-4 py-2 text-sm font-medium">
             Python
           </span>
         </div>
@@ -92,7 +96,7 @@ const birthDate = new Date("2005-02-10");
 <style>
   .profile-card {
     border: 1px solid var(--border);
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     background: color-mix(in srgb, var(--bg) 40%, transparent);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
@@ -110,6 +114,29 @@ const birthDate = new Date("2005-02-10");
     padding: var(--spacing-xl);
   }
 
+  .skills-card {
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: var(--spacing-xl);
+    background: color-mix(in srgb, var(--bg) 45%, transparent);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  .skill-tag {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bg-secondary) 60%, transparent);
+    color: var(--text);
+  }
+
+  .profile-page-title {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.2;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+  }
+
   .profile-card-title {
     transition: color var(--transition);
   }
@@ -121,6 +148,23 @@ const birthDate = new Date("2005-02-10");
   .profile-page > :not(.profile-background) {
     position: relative;
     z-index: 1;
+  }
+
+  .profile-page a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .profile-page .profile-background {
+      opacity: 0.12 !important;
+    }
+
+    .profile-page .profile-card,
+    .profile-page .skills-card,
+    .profile-page .profile-card-title {
+      transition: none;
+    }
   }
 
 </style>
