@@ -26,6 +26,8 @@ typography:
     fontFamily: "JetBrains Mono, Fira Code, Cascadia Code, monospace"
   profile-title:
     fontSize: "clamp(2rem, 4vw, 2.75rem)"
+  blog-title:
+    fontSize: "clamp(var(--text-2xl), 5vw, var(--text-3xl))"
 rounded:
   sm: "0.5rem"
   md: "0.75rem"

@@ -75,7 +75,7 @@ const birthDate = new Date("2005-02-10");
         </div>
       </div>
 
-      <section class="skills-card transition-all hover:shadow-md">
+      <section class="skills-card">
         <h3 class="skills-card-title text-lg font-bold tracking-tight">Skills</h3>
         <div class="mt-5 flex flex-wrap items-center gap-2">
           <span class="skill-tag inline-flex items-center px-4 py-2 text-sm font-medium">
@@ -121,6 +121,14 @@ const birthDate = new Date("2005-02-10");
     background: color-mix(in srgb, var(--bg) 45%, transparent);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
+    transition: border-color var(--transition), transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .skills-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent);
   }
 
   .skill-tag {
