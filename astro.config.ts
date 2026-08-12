@@ -1,4 +1,5 @@
 import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import { defineConfig } from "astro/config";
@@ -26,6 +27,7 @@ export default defineConfig({
       },
     }),
     mdx(),
+    react(),
     sitemap(),
   ],
 

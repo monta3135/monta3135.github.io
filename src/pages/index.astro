@@ -1,13 +1,37 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
 import profileImage from "@/assets/favicon.jpg";
+import profileBackgroundImage from "@/assets/profile-cat-transparent.png";
+import DitheredObject from "@/components/canvasui/DitheredObject";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 
 const birthDate = new Date("2005-02-10");
 ---
 
 <BaseLayout title="Profile" description="monta3135 について">
-  <article class="prose max-w-none">
+  <article class="prose max-w-none profile-page">
+    <DitheredObject
+      client:load
+      className="profile-background"
+      src={profileBackgroundImage.src}
+      method="bayer"
+      gridSize={6}
+      grayscale={true}
+      scale={4}
+      orbit={false}
+      zoom={false}
+      autoRotate={false}
+      floatIntensity={0.8}
+      rotationIntensity={0.3}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: "none",
+        opacity: 0.28,
+      }}
+    />
+
     <h1>Profile</h1>
 
     <section class="not-prose mt-8 space-y-8">
@@ -25,7 +49,7 @@ const birthDate = new Date("2005-02-10");
             <h2 class="profile-card-title text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
               monta3135
             </h2>
-            <p class="mt-4 text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+            <p class="mt-4 text-base leading-relaxed text-zinc-800 dark:text-zinc-200">
               Hi! I’m monta (<FormattedDate date={birthDate} format="age" />). I'm a second-year undergraduate student at Kansai University majoring in Computer Science.
             </p>
 
@@ -47,16 +71,16 @@ const birthDate = new Date("2005-02-10");
         </div>
       </div>
 
-      <section class="rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm transition-all hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/50">
+      <section class="rounded-3xl border border-zinc-200 bg-white/45 p-8 shadow-sm backdrop-blur-sm transition-all hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/30">
         <h3 class="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Skills</h3>
         <div class="mt-5 flex flex-wrap items-center gap-2">
-          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-300">
+          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50/60 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-300">
             C
           </span>
-          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-300">
+          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50/60 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-300">
             C++
           </span>
-          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-300">
+          <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50/60 px-4 py-2 text-sm font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-300">
             Python
           </span>
         </div>
@@ -69,6 +93,9 @@ const birthDate = new Date("2005-02-10");
   .profile-card {
     border: 1px solid var(--border);
     border-radius: 0.5rem;
+    background: color-mix(in srgb, var(--bg) 40%, transparent);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
     transition: border-color var(--transition), transform var(--transition),
       box-shadow var(--transition);
   }
@@ -90,4 +117,10 @@ const birthDate = new Date("2005-02-10");
   .profile-card:hover .profile-card-title {
     color: var(--accent);
   }
+
+  .profile-page > :not(.profile-background) {
+    position: relative;
+    z-index: 1;
+  }
+
 </style>
