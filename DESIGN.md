@@ -38,7 +38,7 @@ components:
   profile-card:
     backgroundColor: "color-mix(in srgb, var(--bg) 40%, transparent)"
     borderColor: "var(--border)"
-    rounded: "0.5rem"
+    rounded: "0.75rem"
     padding: "var(--spacing-xl)"
   skill-tag:
     backgroundColor: "rgb(250 250 249 / 0.6)"
