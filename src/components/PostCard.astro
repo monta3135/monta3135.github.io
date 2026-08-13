@@ -38,7 +38,10 @@ const href = `${baseUrl.replace(/\/$/, "")}/posts/${post.id}`;
   .post-card {
     position: relative;
     border: 1px solid var(--border);
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
     transition: border-color var(--transition), transform var(--transition),
       box-shadow var(--transition);
   }
@@ -117,8 +120,14 @@ const href = `${baseUrl.replace(/\/$/, "")}/posts/${post.id}`;
   .post-card-updated {
     background-color: var(--accent);
     color: #fff;
-    font-size: 0.65rem;
+    font-size: var(--text-xs);
     padding: 0.1em 0.4em;
-    border-radius: 0.2rem;
+    border-radius: var(--spacing-xs);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .post-card {
+      transition: none;
+    }
   }
 </style>
