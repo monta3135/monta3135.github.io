@@ -28,11 +28,11 @@ Three-word personality: **quiet, technical, personal**.
 ## Design Principles
 
 1. **Content leads.** The author's profile and writing remain the primary visual focus.
-2. **Quiet contrast.** Use a warm neutral surface and a restrained blue accent; reserve the cat background for atmosphere.
+2. **Quiet contrast.** Use a warm neutral surface and a restrained blue accent.
 3. **Readable by default.** Preserve clear type scale, line height, focus states, and responsive spacing.
-4. **Motion earns its place.** The Dithered Object background is decorative and must never block interaction or reduce legibility.
+4. **Motion earns its place.** Any decorative effect must never block interaction or reduce legibility.
 5. **Preserve existing identity.** Refinements should keep the current copy, routes, fonts, and Astro/Bun workflow intact.
 
 ## Accessibility & Inclusion
 
-Baseline: WCAG 2.1 AA. Keep semantic headings, meaningful image alt text, keyboard-visible focus states, readable contrast over the cat background, and reduced-motion behavior for decorative animation.
+Baseline: WCAG 2.1 AA. Keep semantic headings, meaningful image alt text, keyboard-visible focus states, readable contrast, and reduced-motion behavior for decorative animation.

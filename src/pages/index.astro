@@ -1,7 +1,5 @@
 ---
 import profileImage from "@/assets/favicon.jpg";
-import profileBackgroundImage from "@/assets/profile-cat-transparent.png";
-import DitheredObject from "@/components/canvasui/DitheredObject";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 
@@ -10,28 +8,6 @@ const birthDate = new Date("2005-02-10");
 
 <BaseLayout title="Profile" description="monta3135 について">
   <article class="prose max-w-none profile-page">
-    <DitheredObject
-      client:load
-      className="profile-background"
-      src={profileBackgroundImage.src}
-      method="bayer"
-      gridSize={6}
-      grayscale={true}
-      scale={4}
-      orbit={false}
-      zoom={false}
-      autoRotate={false}
-      floatIntensity={0.8}
-      rotationIntensity={0.3}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 0,
-        pointerEvents: "none",
-        opacity: 0.28,
-      }}
-    />
-
     <h1 class="profile-page-title">Profile</h1>
 
     <section class="not-prose mt-8 space-y-8">
@@ -159,7 +135,7 @@ const birthDate = new Date("2005-02-10");
     color: var(--accent);
   }
 
-  .profile-page > :not(.profile-background) {
+  .profile-page > * {
     position: relative;
     z-index: 1;
   }
@@ -170,10 +146,6 @@ const birthDate = new Date("2005-02-10");
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .profile-page .profile-background {
-      opacity: 0.12 !important;
-    }
-
     .profile-page .profile-card,
     .profile-page .skills-card,
     .profile-page .profile-card-title {
