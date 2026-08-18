@@ -130,11 +130,19 @@ const ogImageURL = new URL(
 
             const syncActiveHeading = () => {
               let activeId = headingElements[0].id;
-              for (const heading of headingElements) {
-                if (heading.getBoundingClientRect().top <= activeOffset) {
-                  activeId = heading.id;
-                } else {
-                  break;
+              const isAtPageBottom =
+                window.scrollY + window.innerHeight >=
+                document.documentElement.scrollHeight - 2;
+
+              if (isAtPageBottom) {
+                activeId = headingElements[headingElements.length - 1].id;
+              } else {
+                for (const heading of headingElements) {
+                  if (heading.getBoundingClientRect().top <= activeOffset) {
+                    activeId = heading.id;
+                  } else {
+                    break;
+                  }
                 }
               }
               setActiveLink(activeId);
@@ -180,12 +188,16 @@ const ogImageURL = new URL(
     grid-area: content;
     min-width: 0;
     max-width: 760px;
+    width: 100%;
     margin-inline: auto;
   }
 
   .post-toc {
     grid-area: toc;
     align-self: start;
+    width: 100%;
+    max-width: 760px;
+    margin-inline: auto;
   }
 
   .post-toc-inner {
@@ -336,6 +348,103 @@ const ogImageURL = new URL(
 
   .post-footer a:hover {
     color: var(--accent);
+  }
+
+  @media (max-width: 1023px) {
+    .post-layout {
+      gap: 1.25rem;
+    }
+
+    .post-toc-inner {
+      padding: 0.75rem 0.875rem;
+    }
+
+    .toc-title {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc-item {
+      margin-bottom: 0.25rem;
+    }
+
+    .toc-link {
+      min-height: 2.75rem;
+      display: flex;
+      align-items: center;
+      padding-block: 0.45rem;
+    }
+
+    .post-body :global(pre),
+    .post-body :global(.expressive-code) {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .post-body :global(table) {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .post-body :global(a) {
+      overflow-wrap: anywhere;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .post-layout {
+      gap: 1rem;
+    }
+
+    .post-toc-inner {
+      padding: 0.65rem 0.75rem;
+    }
+
+    .toc-list {
+      padding-left: 0.75rem;
+    }
+
+    .toc-item {
+      padding-left: 0.85rem;
+    }
+
+    .toc-item--child {
+      margin-left: 0.75rem;
+    }
+
+    .toc-item--grandchild {
+      margin-left: 1.25rem;
+    }
+
+    .toc-link {
+      font-size: var(--text-xs);
+      line-height: 1.4;
+      padding-inline: 0.15rem 0.35rem;
+    }
+
+    .post-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+    }
+
+    .post-meta {
+      line-height: 1.6;
+    }
+
+    .updated-date {
+      display: block;
+      margin-left: 0;
+    }
+
+    .post-body {
+      margin-top: 1.5rem;
+    }
+
+    .post-body :global(pre) {
+      padding: 0.75rem;
+    }
   }
 
   @media (min-width: 1024px) {
