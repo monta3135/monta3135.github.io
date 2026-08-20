@@ -1,6 +1,6 @@
 ---
 name: monta's blog
-description: Quiet technical personal blog with warm neutral surfaces, restrained blue accents, and a subtle dithered cat atmosphere.
+description: Quiet technical personal blog with warm neutral surfaces and restrained blue accents.
 colors:
   bg: "#fafaf9"
   bg-secondary: "#f5f5f4"
@@ -55,7 +55,7 @@ components:
 
 ## Visual direction
 
-Warm paper-like neutrals and dark brown-black text create a calm reading surface. Blue is the single interactive accent. The transparent cat image is rendered with Canvas UI's Dithered Object as a fixed, pointer-events-free background layer; content cards remain translucent so the atmosphere is visible without sacrificing reading contrast.
+Warm paper-like neutrals and dark brown-black text create a calm reading surface. Blue is the single interactive accent; content cards keep a translucent surface over the plain background with no decorative layer.
 
 ## Layout rules
 
@@ -69,4 +69,3 @@ Warm paper-like neutrals and dark brown-black text create a calm reading surface
 - Profile content uses a single bordered card with a translucent surface and `backdrop-filter`.
 - Skills are grouped in one translucent section; tags are compact pills with readable text.
 - Buttons use the existing dark/light pair and keep visible hover states.
-- Decorative canvas backgrounds remain behind all content with `pointer-events: none`.
