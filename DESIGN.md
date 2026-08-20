@@ -14,16 +14,16 @@ colors:
   tag-text: "#44403c"
 typography:
   body:
-    fontFamily: "Noto Sans JP Variable, Hiragino Sans, Yu Gothic, sans-serif"
+    fontFamily: "IBM Plex Sans JP, Hiragino Sans, Yu Gothic, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.8
   heading:
-    fontFamily: "Noto Sans JP Variable, Hiragino Sans, Yu Gothic, sans-serif"
+    fontFamily: "IBM Plex Sans JP, Hiragino Sans, Yu Gothic, sans-serif"
     fontWeight: 700
     letterSpacing: "-0.02em"
   mono:
-    fontFamily: "JetBrains Mono, Fira Code, Cascadia Code, monospace"
+    fontFamily: "IBM Plex Mono, Fira Code, Cascadia Code, monospace"
   profile-title:
     fontSize: "clamp(2rem, 4vw, 2.75rem)"
   blog-title:

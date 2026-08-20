@@ -1,0 +1,36 @@
+@import "../assets/fonts/ibm-plex-mono/400.css";
+@import "../assets/fonts/ibm-plex-mono/400-italic.css";
+
+/* IBM Plex Sans JP is bundled locally so the page does not depend on a
+   third-party font request. The complete WOFF2 files cover Japanese glyphs. */
+@font-face {
+  font-family: "IBM Plex Sans JP";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("../assets/fonts/ibm-plex-sans-jp/IBMPlexSansJP-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans JP";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url("../assets/fonts/ibm-plex-sans-jp/IBMPlexSansJP-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans JP";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url("../assets/fonts/ibm-plex-sans-jp/IBMPlexSansJP-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans JP";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("../assets/fonts/ibm-plex-sans-jp/IBMPlexSansJP-Bold.woff2") format("woff2");
+}

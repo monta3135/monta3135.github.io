@@ -1,6 +1,6 @@
 /* ============================================================
    Global Styles — Vanilla CSS
-   "Freeze everything" philosophy: fonts bundled via @fontsource-variable
+   "Freeze everything" philosophy: fonts bundled with the site
    ============================================================ */
 
 /* Tailwind utilities (without preflight reset) */
@@ -8,15 +8,13 @@
 @import "tailwindcss/utilities.css";
 
 /* --- Font imports (bundled, no external requests) --- */
-@import "@fontsource-variable/noto-sans-jp";
-@import "@fontsource/jetbrains-mono/400.css";
-@import "@fontsource/jetbrains-mono/400-italic.css";
+@import "./fonts.css";
 
 /* --- CSS Custom Properties --- */
 :root {
   /* Typography */
-  --font-sans: "Noto Sans JP Variable", "Hiragino Sans", "Yu Gothic", sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  --font-sans: "IBM Plex Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", "Fira Code", "Cascadia Code", monospace;
 
   /* Font sizes */
   --text-xs: 0.75rem;
@@ -90,6 +88,7 @@ html {
 body {
   font-family: var(--font-sans);
   font-size: var(--text-base);
+  font-weight: 400;
   line-height: 1.8;
   color: var(--text);
   background-color: var(--bg);
