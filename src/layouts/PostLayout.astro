@@ -122,6 +122,7 @@ const ogImageURL = new URL(
             ).values(),
           );
           const progressItems = Array.from(tocRoot.querySelectorAll("[data-toc-progress-item]"));
+          const desktopTocQuery = window.matchMedia("(min-width: 1024px)");
 
           if (links.length > 0 && headingElements.length > 0) {
             const activeOffset = 120;
@@ -151,7 +152,7 @@ const ogImageURL = new URL(
               }
 
               const activeLink = links.find((link) => link.getAttribute("data-toc-id") === id);
-              if (activeLink instanceof HTMLElement) {
+              if (activeLink instanceof HTMLElement && desktopTocQuery.matches) {
                 activeLink.scrollIntoView({ block: "nearest" });
               }
             };
