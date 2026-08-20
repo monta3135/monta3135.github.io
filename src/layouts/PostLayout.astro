@@ -42,25 +42,27 @@ const ogImageURL = new URL(
     {
       hasToc && (
         <aside class="post-toc">
-          <nav class="post-toc-inner" aria-label="目次" data-post-toc>
-            <p class="toc-title">目次</p>
-            <ol class="toc-list">
-              {tocHeadings.map((heading) => (
-                <li
-                  class:list={[
-                    "toc-item",
-                    {
-                      "toc-item--child": heading.depth > minTocDepth,
-                      "toc-item--grandchild": heading.depth > minTocDepth + 1,
-                    },
-                  ]}
-                >
-                  <a href={`#${heading.slug}`} class="toc-link" data-toc-link data-toc-id={heading.slug}>
-                    {heading.text}
-                  </a>
-                </li>
-              ))}
-            </ol>
+          <nav class="post-toc-inner" aria-label="目次" data-post-toc data-toc-mode="progress">
+            <div class="toc-header">
+              <p class="toc-title">目次</p>
+            </div>
+
+            <div class="toc-panel toc-panel--progress" data-toc-panel="progress">
+              <ol class="toc-list toc-list--progress">
+                {tocHeadings.map((heading, index) => (
+                  <li
+                    class="toc-progress-item"
+                    style={`--toc-level: ${Math.max(0, heading.depth - minTocDepth)}`}
+                    data-toc-progress-item
+                    data-toc-index={index}
+                  >
+                    <a href={`#${heading.slug}`} class="toc-link" data-toc-link data-toc-id={heading.slug}>
+                      <span class="toc-item-label">{heading.text}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </nav>
         </aside>
       )
@@ -108,33 +110,67 @@ const ogImageURL = new URL(
         const tocRoot = document.querySelector("[data-post-toc]");
         if (tocRoot instanceof HTMLElement) {
           const links = Array.from(tocRoot.querySelectorAll("a[data-toc-link]"));
-          const headingElements = links
-            .map((link) => {
-              const id = link.getAttribute("data-toc-id");
-              return id ? document.getElementById(id) : null;
-            })
-            .filter((heading) => heading instanceof HTMLElement);
+          const headingElements = Array.from(
+            new Map(
+              links
+                .map((link) => {
+                  const id = link.getAttribute("data-toc-id");
+                  const heading = id ? document.getElementById(id) : null;
+                  return heading instanceof HTMLElement ? [heading.id, heading] : null;
+                })
+                .filter((entry) => entry !== null),
+            ).values(),
+          );
+          const progressItems = Array.from(tocRoot.querySelectorAll("[data-toc-progress-item]"));
 
           if (links.length > 0 && headingElements.length > 0) {
-            const activeOffset = 96;
+            const activeOffset = 120;
 
             const setActiveLink = (id) => {
+              const activeIndex = Math.max(
+                0,
+                headingElements.findIndex((heading) => heading.id === id),
+              );
+
               for (const link of links) {
-                if (link.getAttribute("data-toc-id") === id) {
+                const linkIndex = headingElements.findIndex(
+                  (heading) => heading.id === link.getAttribute("data-toc-id"),
+                );
+                const state = linkIndex < activeIndex ? "read" : linkIndex === activeIndex ? "current" : "upcoming";
+                link.dataset.tocState = state;
+                if (state === "current") {
                   link.setAttribute("aria-current", "location");
                 } else {
                   link.removeAttribute("aria-current");
                 }
               }
+
+              for (const item of progressItems) {
+                const itemIndex = Number(item.getAttribute("data-toc-index"));
+                item.dataset.tocState = itemIndex < activeIndex ? "read" : itemIndex === activeIndex ? "current" : "upcoming";
+              }
+
+              const activeLink = links.find((link) => link.getAttribute("data-toc-id") === id);
+              if (activeLink instanceof HTMLElement) {
+                activeLink.scrollIntoView({ block: "nearest" });
+              }
             };
 
             const syncActiveHeading = () => {
               let activeId = headingElements[0].id;
-              for (const heading of headingElements) {
-                if (heading.getBoundingClientRect().top <= activeOffset) {
-                  activeId = heading.id;
-                } else {
-                  break;
+              const isAtPageEnd =
+                window.scrollY + window.innerHeight >=
+                document.documentElement.scrollHeight - 8;
+
+              if (isAtPageEnd) {
+                activeId = headingElements[headingElements.length - 1].id;
+              } else {
+                for (const heading of headingElements) {
+                  if (heading.getBoundingClientRect().top <= activeOffset) {
+                    activeId = heading.id;
+                  } else {
+                    break;
+                  }
                 }
               }
               setActiveLink(activeId);
@@ -189,95 +225,98 @@ const ogImageURL = new URL(
   }
 
   .post-toc-inner {
-    border: 1px solid var(--border);
-    border-radius: 0.625rem;
-    background-color: color-mix(in srgb, var(--bg) 94%, var(--bg-secondary));
-    box-shadow: 0 14px 30px -28px color-mix(in srgb, var(--text) 80%, transparent);
-    padding: 0.9rem 1rem;
-    --toc-tree-line: color-mix(in srgb, var(--accent) 42%, var(--border));
-    --toc-tree-node: color-mix(in srgb, var(--accent) 62%, var(--text-muted));
+    transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+  }
+
+  .post-toc-inner[data-toc-mode="progress"] {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0.3rem 0;
+  }
+
+  .toc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.9rem;
   }
 
   .toc-title {
-    font-size: var(--text-sm);
-    font-family: var(--font-mono);
     color: var(--text);
-    margin-bottom: 0.7rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.25;
   }
 
   .toc-list {
     list-style: none;
     margin: 0;
-    padding-left: 1rem;
-    position: relative;
-  }
-
-  .toc-list::before {
-    content: "";
-    position: absolute;
-    left: 0.2rem;
-    top: 0.15rem;
-    bottom: 0.15rem;
-    width: 2px;
-    background-color: var(--toc-tree-line);
-  }
-
-  .toc-item {
-    position: relative;
-    padding-left: 1.15rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .toc-item::before {
-    content: "";
-    position: absolute;
-    top: 0.85em;
-    left: 0.2rem;
-    width: 0.8rem;
-    height: 2px;
-    background-color: var(--toc-tree-line);
-  }
-
-  .toc-item::after {
-    content: "";
-    position: absolute;
-    top: calc(0.85em - 0.18rem);
-    left: calc(0.2rem - 0.16rem);
-    width: 0.35rem;
-    height: 0.35rem;
-    border-radius: 999px;
-    background-color: var(--toc-tree-node);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--bg) 85%, transparent);
-  }
-
-  .toc-item--child {
-    margin-left: 1.2rem;
-  }
-
-  .toc-item--grandchild {
-    margin-left: 2rem;
   }
 
   .toc-link {
     display: block;
+    min-width: 0;
     color: var(--text-muted);
     text-decoration: none;
-    font-size: var(--text-sm);
+    font-size: 0.9rem;
     line-height: 1.45;
-    padding: 0.12rem 0.3rem 0.12rem 0.15rem;
-    border-radius: 0.35rem;
-    transition: color var(--transition);
+    padding: 0.22rem 0;
+    border-radius: 0;
+    transition: color var(--transition), opacity var(--transition);
     text-wrap: pretty;
+  }
+
+  .toc-item-label {
+    min-width: 0;
   }
 
   .toc-link:hover {
     color: var(--text);
+    text-decoration: none;
   }
 
-  .toc-link[aria-current="location"] {
+  .toc-list--progress {
+    display: grid;
+    gap: 0.04rem;
+  }
+
+  .toc-progress-item {
+    display: block;
+    margin-left: calc(var(--toc-level) * 1.2rem);
+  }
+
+  .toc-list--progress .toc-link {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.45;
+    padding: 0.2rem 0;
+    transition: color var(--transition), opacity var(--transition);
+  }
+
+  .toc-list--progress .toc-link[data-toc-state="upcoming"] {
+    color: color-mix(in srgb, var(--accent) 42%, var(--bg));
+    opacity: 1;
+  }
+
+  .toc-list--progress .toc-link[data-toc-state="read"] {
     color: var(--accent);
     font-weight: 700;
-    background-color: color-mix(in srgb, var(--accent) 14%, transparent);
+  }
+
+  .toc-list--progress .toc-link[aria-current="location"] {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .toc-list--progress .toc-link:hover {
+    color: color-mix(in srgb, var(--accent) 78%, var(--text));
   }
 
   .post-header {
@@ -340,7 +379,7 @@ const ogImageURL = new URL(
 
   @media (min-width: 1024px) {
     .post-layout {
-      grid-template-columns: minmax(0, 760px) minmax(15rem, 18rem);
+      grid-template-columns: minmax(0, 760px) minmax(18rem, 22rem);
       grid-template-areas: "content toc";
       justify-content: center;
       gap: 2.25rem;
@@ -356,11 +395,15 @@ const ogImageURL = new URL(
       max-height: calc(100dvh - var(--header-height) - 2rem);
       overflow: auto;
     }
+
+    .post-toc-inner[data-toc-mode="progress"] {
+      padding-right: 0.25rem;
+    }
   }
 
   @media (min-width: 1360px) {
     .post-layout {
-      grid-template-columns: 16rem minmax(0, 760px) 16rem;
+      grid-template-columns: 16rem minmax(0, 760px) 21rem;
       gap: 2rem;
     }
 
@@ -371,6 +414,23 @@ const ogImageURL = new URL(
 
     .post-toc {
       grid-column: 3;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .post-toc-inner[data-toc-mode="progress"] {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.25rem;
+    }
+
+    .toc-panel {
+      max-width: 42rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toc-link {
+      transition: none;
     }
   }
 </style>
