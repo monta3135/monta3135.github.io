@@ -14,6 +14,7 @@
 :root {
   /* Typography */
   --font-sans: "IBM Plex Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-badge-detail: "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", sans-serif;
   --font-mono: "IBM Plex Mono", "Fira Code", "Cascadia Code", monospace;
 
   /* Font sizes */
@@ -24,6 +25,12 @@
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
   --text-3xl: 1.875rem;
+  --text-display: 4.5rem;
+  --text-display-compact: 4rem;
+  --text-badge-label: 0.75rem;
+  --text-badge-detail: 0.5rem;
+  --text-kmc-mark: 1.5625rem;
+  --text-kmc-caption: 0.2375rem;
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -33,6 +40,11 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
+  --spacing-4xl: 7rem;
+
+  /* Classic web buttons */
+  --web-badge-width: 6.5rem;
+  --web-badge-height: 2.3125rem;
 
   /* Layout */
   --content-width: 720px;

@@ -2,155 +2,256 @@
 import profileImage from "@/assets/favicon.jpg";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import WebBadge from "../components/WebBadge.astro";
 
 const birthDate = new Date("2005-02-10");
 ---
 
 <BaseLayout title="Profile" description="monta3135 について">
-  <article class="prose max-w-none profile-page">
-    <h1 class="profile-page-title">Profile</h1>
+  <article class="profile-page">
+    <header class="profile-intro">
+      <div class="profile-identity">
+        <h1 class="profile-name">monta3135</h1>
+        <p class="profile-summary">
+          Hi! I’m monta (<FormattedDate date={birthDate} format="age" />). I'm a
+          second-year undergraduate student at Kansai University majoring in
+          Computer Science.
+        </p>
 
-    <section class="not-prose mt-8 space-y-8">
-      <div class="profile-card">
-        <div class="profile-card-inner sm:flex sm:items-start sm:gap-8">
-          <div class="shrink-0">
-            <img
-              src={profileImage.src}
-              alt="monta3135's profile image"
-              width={160}
-              height={160}
-              loading="eager"
-              decoding="async"
-              class="mx-auto h-32 w-32 rounded-full object-cover shadow-sm ring-1 ring-zinc-200 sm:mx-0 sm:h-40 sm:w-40 dark:ring-zinc-700"
-            />
-          </div>
-
-          <div class="mt-6 text-center sm:mt-0 sm:text-left">
-            <h2 class="profile-card-title text-3xl font-bold tracking-tight">
-              monta3135
-            </h2>
-            <p class="profile-card-copy mt-4 text-base leading-relaxed">
-              Hi! I’m monta (<FormattedDate date={birthDate} format="age" />). I'm a second-year undergraduate student at Kansai University majoring in Computer Science.
-            </p>
-
-            <div class="mt-6 flex flex-wrap justify-center gap-4 sm:justify-start">
-              <a
-                href="https://twitter.com/monta3135"
-                class="inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
-              >
-                Twitter
-              </a>
-              <a
-                href="https://github.com/monta3135"
-                class="inline-flex items-center justify-center rounded-full border border-zinc-200 bg-white px-6 py-2.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
+        <nav class="profile-links" aria-label="ソーシャルリンク">
+          <a href="https://twitter.com/monta3135">Twitter</a>
+          <a href="https://github.com/monta3135">GitHub</a>
+        </nav>
       </div>
 
-      <section class="skills-card">
-        <h3 class="skills-card-title text-lg font-bold tracking-tight">Skills</h3>
-        <div class="mt-5 flex flex-wrap items-center gap-2">
-          <span class="skill-tag inline-flex items-center px-4 py-2 text-sm font-medium">
-            C
-          </span>
-          <span class="skill-tag inline-flex items-center px-4 py-2 text-sm font-medium">
-            C++
-          </span>
-          <span class="skill-tag inline-flex items-center px-4 py-2 text-sm font-medium">
-            Python
-          </span>
-        </div>
-      </section>
+      <figure class="profile-portrait">
+        <img
+          src={profileImage.src}
+          alt="monta3135's profile image"
+          width={160}
+          height={160}
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+    </header>
+
+    <section class="profile-details" aria-labelledby="interests-title">
+      <h2 id="interests-title">Interests</h2>
+      <ul class="interests-list" aria-label="Areas of interest">
+        <li>Machine Learning</li>
+        <li>NLP</li>
+        <li>Networking</li>
+        <li>HPC</li>
+      </ul>
     </section>
+
+    <nav class="profile-details profile-links-section" aria-label="Recommended websites">
+      <div class="web-badges">
+        <WebBadge
+          href="https://www.kmc.gr.jp/"
+          variant="kmc"
+          ariaLabel="Open the Kyoto University Microcomputer Club website"
+        />
+        <WebBadge
+          href="https://www.youtube.com/playlist?list=PLh8h-fj0dqWH6HYgt9KmKNMek0wCSG6Jc"
+          variant="youtube"
+          ariaLabel="Open the YouTube playlist"
+        />
+        <WebBadge
+          href="https://www.aozora.gr.jp/cards/000182/files/3505_53075.html"
+          label="読書"
+          detail="西田幾多郎"
+          variant="aozora"
+          ariaLabel="Open Nishida Kitaro's Reading on Aozora Bunko"
+        />
+      </div>
+    </nav>
   </article>
 </BaseLayout>
 
 <style>
-  .profile-card {
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    background: color-mix(in srgb, var(--bg) 40%, transparent);
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
-    transition: border-color var(--transition), transform var(--transition),
-      box-shadow var(--transition);
+  .profile-page {
+    padding-block: clamp(var(--spacing-xl), 7vw, var(--spacing-3xl));
   }
 
-  .profile-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent);
+  .profile-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 10rem;
+    gap: clamp(var(--spacing-xl), 7vw, var(--spacing-3xl));
+    align-items: start;
   }
 
-  .profile-card-inner {
-    padding: var(--spacing-xl);
-  }
-
-  .skills-card {
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    padding: var(--spacing-xl);
-    background: color-mix(in srgb, var(--bg) 45%, transparent);
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
-    transition: border-color var(--transition), transform var(--transition),
-      box-shadow var(--transition);
-  }
-
-  .skills-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent);
-  }
-
-  .skill-tag {
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--bg-secondary) 60%, transparent);
+  .profile-name {
+    max-width: 9ch;
+    margin: 0;
     color: var(--text);
+    font-size: clamp(var(--text-3xl), 9vw, var(--text-display));
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
   }
 
-  .profile-page-title {
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    line-height: 1.2;
+  .profile-summary {
+    max-width: 34rem;
     margin-top: var(--spacing-xl);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .profile-card-title {
     color: var(--text);
-    transition: color var(--transition);
+    font-size: var(--text-lg);
+    line-height: 1.75;
   }
 
-  .profile-card-copy,
-  .skills-card-title {
+  .profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm) var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+  }
+
+  .profile-links a {
     color: var(--text);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration-color: var(--border);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.35em;
+    transition: color var(--transition), text-decoration-color var(--transition);
   }
 
-  .profile-card:hover .profile-card-title {
+  .profile-links a:hover {
     color: var(--accent);
+    text-decoration-color: currentColor;
   }
 
-  .profile-page > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  .profile-page a:focus-visible {
+  .profile-links a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 4px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .profile-page .profile-card,
-    .profile-page .skills-card,
-    .profile-page .profile-card-title {
-      transition: none;
+  .profile-portrait {
+    margin: 0;
+  }
+
+  .profile-portrait img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .profile-details {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: clamp(var(--spacing-xl), 7vw, var(--spacing-3xl));
+    margin-top: clamp(var(--spacing-3xl), 12vw, var(--spacing-4xl));
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border);
+  }
+
+  .profile-details h2 {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  .interests-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .interests-list li {
+    padding-block: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+  }
+
+  .interests-list li:nth-child(even) {
+    padding-left: var(--spacing-md);
+  }
+
+  .profile-links-section {
+    margin-top: var(--spacing-3xl);
+  }
+
+  .web-badges {
+    display: flex;
+    grid-column: 2;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+
+  @media (max-width: 36rem) {
+    .profile-intro {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xl);
+    }
+
+    .profile-identity {
+      display: contents;
+    }
+
+    .profile-name {
+      grid-row: 1;
+      font-size: clamp(var(--text-3xl), 14vw, var(--text-display-compact));
+    }
+
+    .profile-portrait {
+      grid-row: 2;
+      width: 7.5rem;
+    }
+
+    .profile-summary {
+      grid-row: 3;
+      margin-top: 0;
+      font-size: var(--text-base);
+    }
+
+    .profile-links {
+      grid-row: 4;
+      margin-top: 0;
+    }
+
+    .profile-details {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .interests-list {
+      grid-template-columns: 1fr;
+    }
+
+    .interests-list li {
+      padding-block: var(--spacing-sm);
+    }
+
+    .interests-list li:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .interests-list li:nth-child(even) {
+      padding-left: 0;
+    }
+
+    .profile-links-section {
+      margin-top: var(--spacing-2xl);
+    }
+
+    .web-badges {
+      grid-column: 1;
     }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .profile-links a {
+      transition: none;
+    }
+  }
 </style>

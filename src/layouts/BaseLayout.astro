@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import ibmPlexSansLatinRegular from "@/assets/fonts/ibm-plex-sans-jp/ibm-plex-sans-jp-latin-400-normal.woff2";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 
@@ -39,6 +40,14 @@ const normalizedOgImage = new URL(ogImage, Astro.site).toString();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+
+    <link
+      rel="preload"
+      href={ibmPlexSansLatinRegular}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <title>{fullTitle}</title>
     <meta name="description" content={description || "monta のブログ"} />

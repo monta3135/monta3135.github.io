@@ -15,6 +15,6 @@
     "indentWidth": 2
   },
   "files": {
-    "ignore": ["dist", "node_modules", ".astro", ".agents"]
+    "ignore": ["dist", "node_modules", ".astro", ".agents", ".impeccable"]
   }
 }
