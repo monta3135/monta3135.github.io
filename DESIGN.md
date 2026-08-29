@@ -40,13 +40,11 @@ colors:
   crt-dial-border: "#3f2c1c"
   crt-dial-shadow: "#765334"
   crt-feet: "#422d1e"
-  badge-aozora-bg: "#e8e0cd"
-  badge-aozora-border: "#5a7084"
-  badge-aozora-dark: "#a4afaf"
-  badge-aozora-hover: "#2a5c87"
-  badge-aozora-hover-border: "#b8d7ee"
-  badge-aozora-text: "#fffdf4"
-  badge-aozora-ink: "#194d7a"
+  badge-juice-bg: "#f8e5ed"
+  badge-juice-border: "#3f1730"
+  badge-juice-dark: "#8b365e"
+  badge-juice-text: "#551739"
+  badge-juice-accent: "#d74478"
 typography:
   body:
     fontFamily: "IBM Plex Sans JP, Hiragino Sans, Yu Gothic, sans-serif"
@@ -93,7 +91,7 @@ spacing:
   4xl: "7rem"
 components:
   profile-layout:
-    structure: "editorial two-column introduction with a ruled interests list"
+    structure: "editorial two-column introduction with a ruled favorite-books list"
     border: "1px solid var(--border) used for section rules only"
 ---
 
@@ -113,19 +111,21 @@ Warm paper-like neutrals and dark brown-black text create a calm reading surface
 
 ## Component rules
 
-- Profile content is a single editorial flow: introduction, portrait, links, then a ruled interests list.
-- Interests use a two-column desktop list and a one-column mobile list: Machine Learning, NLP, Networking, and HPC.
+- Profile content is a single editorial flow: introduction, portrait, links, then a ruled favorite-books list.
+- The introduction states the author's interest in machine learning and robotics. Favorite books are a one-column list whose entries need only a title and URL so more can be added without changing the layout.
 - Links remain text links with visible underlines and keyboard focus states.
 
 ## Durable web badge rules
 
-- The profile ends with three 104×37px classic web badges and no visible section
-  title. They are ordinary same-tab links and never become cards.
-- Badges use crisp square corners, a 1px beveled/inset border, compact type,
-  and CSS/SVG geometry only. KMC borrows the official logo's dense overlapping
-  letters and arrow-ended C. YouTube is a brown CRT with a green scanline screen,
-  two physical dials, and no playlist title. Aozora remains paper/blue. Hover
-  changes color and border; active moves down 1px; keyboard focus is visible.
+- The profile ends with one 104×37px KMC badge and two 88×31px classic web
+  banners with no visible section title. They are ordinary same-tab links and
+  never become cards.
+- The banners intentionally feel historically out of place beside the quiet
+  profile: crisp pixel edges, hard bevels, dense small type, and era-specific
+  color. KMC uses the supplied mini logo. YouTube is a red 2011–2013-logo
+  inspired banner; Juice=Juice is a blush and burgundy banner labeled with
+  盛れ！ミ・アモーレ. Hover brightens the image; active moves down 1px; keyboard
+  focus is visible.
 - IBM Plex Sans JP is locally bundled. The official Fontsource Latin WOFF2
   subsets are loaded through a Latin `unicode-range`; the existing full IBM
   files are restricted to Japanese ranges. Only the Latin Regular face is

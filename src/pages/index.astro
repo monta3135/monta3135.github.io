@@ -5,6 +5,13 @@ import FormattedDate from "../components/FormattedDate.astro";
 import WebBadge from "../components/WebBadge.astro";
 
 const birthDate = new Date("2005-02-10");
+
+const favoriteBooks = [
+  {
+    title: "読書 — 西田幾多郎",
+    href: "https://www.aozora.gr.jp/cards/000182/files/3505_53075.html",
+  },
+];
 ---
 
 <BaseLayout title="Profile" description="monta3135 について">
@@ -15,7 +22,7 @@ const birthDate = new Date("2005-02-10");
         <p class="profile-summary">
           Hi! I’m monta (<FormattedDate date={birthDate} format="age" />). I'm a
           second-year undergraduate student at Kansai University majoring in
-          Computer Science.
+          Computer Science. I'm interested in machine learning and robotics.
         </p>
 
         <nav class="profile-links" aria-label="ソーシャルリンク">
@@ -36,13 +43,16 @@ const birthDate = new Date("2005-02-10");
       </figure>
     </header>
 
-    <section class="profile-details" aria-labelledby="interests-title">
-      <h2 id="interests-title">Interests</h2>
-      <ul class="interests-list" aria-label="Areas of interest">
-        <li>Machine Learning</li>
-        <li>NLP</li>
-        <li>Networking</li>
-        <li>HPC</li>
+    <section class="profile-details" aria-labelledby="favorite-books-title">
+      <h2 id="favorite-books-title">Favorite Books</h2>
+      <ul class="favorite-books-list">
+        {
+          favoriteBooks.map((book) => (
+            <li>
+              <a href={book.href}>{book.title}</a>
+            </li>
+          ))
+        }
       </ul>
     </section>
 
@@ -59,11 +69,9 @@ const birthDate = new Date("2005-02-10");
           ariaLabel="Open the YouTube playlist"
         />
         <WebBadge
-          href="https://www.aozora.gr.jp/cards/000182/files/3505_53075.html"
-          label="読書"
-          detail="西田幾多郎"
-          variant="aozora"
-          ariaLabel="Open Nishida Kitaro's Reading on Aozora Bunko"
+          href="https://youtu.be/3RtbnP1onaM?si=sFdHLM117WNp0qFI"
+          variant="juice"
+          ariaLabel="Open Juice=Juice『盛れ！ミ・アモーレ』 on YouTube"
         />
       </div>
     </nav>
@@ -109,17 +117,17 @@ const birthDate = new Date("2005-02-10");
   }
 
   .profile-links a {
-    color: var(--text);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    text-decoration-color: var(--border);
-    text-decoration-thickness: 1px;
+    color: var(--accent);
+    font-size: var(--text-base);
+    font-weight: 700;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 1.5px;
     text-underline-offset: 0.35em;
     transition: color var(--transition), text-decoration-color var(--transition);
   }
 
   .profile-links a:hover {
-    color: var(--accent);
+    color: var(--accent-hover);
     text-decoration-color: currentColor;
   }
 
@@ -156,24 +164,35 @@ const birthDate = new Date("2005-02-10");
     letter-spacing: 0;
   }
 
-  .interests-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .favorite-books-list {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .interests-list li {
+  .favorite-books-list li {
     padding-block: var(--spacing-sm) var(--spacing-md);
     border-bottom: 1px solid var(--border);
-    color: var(--text);
-    font-family: var(--font-mono);
-    font-size: var(--text-base);
   }
 
-  .interests-list li:nth-child(even) {
-    padding-left: var(--spacing-md);
+  .favorite-books-list a {
+    color: var(--text);
+    font-size: var(--text-base);
+    font-weight: 500;
+    overflow-wrap: anywhere;
+    text-decoration-color: var(--border);
+    text-underline-offset: 0.35em;
+    transition: color var(--transition), text-decoration-color var(--transition);
+  }
+
+  .favorite-books-list a:hover {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+
+  .favorite-books-list a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
   }
 
   .profile-links-section {
@@ -224,20 +243,12 @@ const birthDate = new Date("2005-02-10");
       gap: var(--spacing-lg);
     }
 
-    .interests-list {
-      grid-template-columns: 1fr;
-    }
-
-    .interests-list li {
+    .favorite-books-list li {
       padding-block: var(--spacing-sm);
     }
 
-    .interests-list li:first-child {
+    .favorite-books-list li:first-child {
       border-top: 1px solid var(--border);
-    }
-
-    .interests-list li:nth-child(even) {
-      padding-left: 0;
     }
 
     .profile-links-section {
@@ -250,7 +261,8 @@ const birthDate = new Date("2005-02-10");
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .profile-links a {
+    .profile-links a,
+    .favorite-books-list a {
       transition: none;
     }
   }

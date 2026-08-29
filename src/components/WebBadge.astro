@@ -1,13 +1,15 @@
 ---
+import kmcLogo from "../assets/KMClogo_mini.png";
+import juiceBanner from "../assets/juice-banner.svg";
+import youtubeBanner from "../assets/youtube-banner.svg";
+
 interface Props {
   href: string;
-  label?: string;
-  detail?: string;
-  variant: "kmc" | "youtube" | "aozora";
+  variant: "kmc" | "youtube" | "juice";
   ariaLabel: string;
 }
 
-const { href, label, detail, variant, ariaLabel } = Astro.props;
+const { href, variant, ariaLabel } = Astro.props;
 ---
 
 <a
@@ -17,27 +19,35 @@ const { href, label, detail, variant, ariaLabel } = Astro.props;
 >
   {
     variant === "kmc" ? (
-      <svg class="kmc-mark" viewBox="0 0 96 29" aria-hidden="true">
-        <text x="2" y="21">KMC</text>
-        <path d="M82 8h10l-5 5 5 5H82l-5-5z" />
-        <text class="kmc-caption" x="3" y="27">KYOTO MICRO COMPUTER CLUB</text>
-      </svg>
+      <img
+        class="kmc-logo"
+        src={kmcLogo.src}
+        alt=""
+        width="120"
+        height="77"
+        aria-hidden="true"
+        decoding="async"
+      />
     ) : variant === "youtube" ? (
-      <span class="crt" aria-hidden="true">
-        <span class="crt-screen">
-          <span class="crt-glow" />
-        </span>
-        <span class="crt-controls">
-          <span class="crt-dial" />
-          <span class="crt-dial" />
-        </span>
-        <span class="crt-feet" />
-      </span>
+      <img
+        class="web-badge-image"
+        src={youtubeBanner.src}
+        alt=""
+        width="88"
+        height="31"
+        aria-hidden="true"
+        decoding="async"
+      />
     ) : (
-      <>
-        <span class="web-badge-label">{label}</span>
-        <span class="web-badge-detail">{detail}</span>
-      </>
+      <img
+        class="web-badge-image"
+        src={juiceBanner.src}
+        alt=""
+        width="88"
+        height="31"
+        aria-hidden="true"
+        decoding="async"
+      />
     )
   }
 </a>
@@ -84,149 +94,56 @@ const { href, label, detail, variant, ariaLabel } = Astro.props;
     outline-offset: 3px;
   }
 
-  .kmc-mark {
-    width: 94%;
+  .kmc-logo {
+    display: block;
+    width: auto;
     height: 86%;
-    fill: currentColor;
-  }
-
-  .kmc-mark text:first-child {
-    font-family: var(--font-sans);
-    font-size: var(--text-kmc-mark);
-    font-weight: 700;
-    letter-spacing: -5px;
-  }
-
-  .kmc-caption {
-    font-family: var(--font-mono);
-    font-size: var(--text-kmc-caption);
-    font-weight: 700;
-    letter-spacing: 0.12px;
+    max-width: 94%;
+    object-fit: contain;
   }
 
   .web-badge--kmc {
-    --badge-bg: #151813;
-    --badge-border: #87917c;
-    --badge-dark: #080a07;
-    --badge-hover-bg: #30392a;
-    --badge-hover-border: #d8e2cf;
-    --badge-hover-text: #f0f5ec;
-    --badge-light: #444d3e;
-    --badge-text: #e4ebdf;
+    --badge-bg: #fff;
+    --badge-border: #151813;
+    --badge-dark: #87917c;
+    --badge-hover-bg: #f0f5ec;
+    --badge-hover-border: #30392a;
+    --badge-hover-text: #151813;
+    --badge-light: #fff;
+    --badge-text: #151813;
   }
 
-  .web-badge--youtube {
-    --badge-bg: #7d5b38;
-    --badge-border: #4c321f;
-    --badge-dark: #3b281b;
-    --badge-hover-bg: #906d46;
-    --badge-hover-border: #c9ad83;
-    --badge-hover-text: #fff6dc;
-    --badge-light: #b28b5f;
-    --badge-text: #fff6dc;
+  .web-badge--youtube,
+  .web-badge--juice {
+    width: 88px;
+    min-width: 88px;
+    height: 31px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    transition: filter var(--transition);
   }
 
-  .crt {
-    display: grid;
-    width: 78px;
-    height: 29px;
-    grid-template-columns: 58px 12px;
-    gap: 3px;
-    padding: 3px;
-    border: 1px solid #432d1d;
-    border-radius: var(--spacing-xs);
-    background: #a27c50;
-    box-shadow:
-      inset 1px 1px 0 #d4b78d,
-      inset -1px -1px 0 #5a3d25;
-  }
-
-  .crt-screen {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid #2e3328;
-    border-radius: 6px / 4px;
-    background-color: #8d9b7d;
-    background-image: repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 2px,
-      rgb(35 43 33 / 18%) 3px
-    );
-    box-shadow: inset 0 0 5px #35402f;
-  }
-
-  .crt-glow {
-    position: absolute;
-    inset: 5px 13px;
-    border-radius: 1px;
-    background: #f3e6bd;
-    box-shadow: 0 0 4px #e7d8a9;
-    clip-path: polygon(0 0, 100% 50%, 0 100%);
-  }
-
-  .crt-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-  }
-
-  .crt-dial {
-    width: 6px;
-    height: 6px;
-    border: 1px solid #3f2c1c;
-    border-radius: 50%;
-    background: #d4b78d;
-    box-shadow: inset -1px -1px 0 #765334;
-  }
-
-  .crt-feet {
-    position: absolute;
-    right: 25px;
-    bottom: 0;
-    width: 50px;
-    height: 2px;
-    border-inline: 5px solid #422d1e;
-  }
-
-  .web-badge-label,
-  .web-badge-detail {
+  .web-badge-image {
     display: block;
-    overflow: hidden;
-    padding-inline: var(--spacing-xs);
-    text-overflow: clip;
-    white-space: nowrap;
+    width: 88px;
+    height: 31px;
+    image-rendering: crisp-edges;
   }
 
-  .web-badge-label {
-    font-size: var(--text-badge-label);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-  }
-
-  .web-badge-detail {
-    margin-top: 3px;
-    font-family: var(--font-badge-detail);
-    font-size: var(--text-badge-detail);
-    font-weight: 500;
-    letter-spacing: 0;
-  }
-
-  .web-badge--aozora {
-    --badge-bg: #e8e0cd;
-    --badge-border: #5a7084;
-    --badge-dark: #a4afaf;
-    --badge-hover-bg: #2a5c87;
-    --badge-hover-border: #b8d7ee;
-    --badge-hover-text: #fffdf4;
-    --badge-light: #fffdf4;
-    --badge-text: #194d7a;
+  .web-badge--youtube:hover,
+  .web-badge--juice:hover {
+    background: transparent;
+    filter: brightness(1.08) saturate(1.08);
   }
 
   @media (prefers-reduced-motion: reduce) {
     .web-badge {
+      transition: none;
+    }
+
+    .web-badge--youtube,
+    .web-badge--juice {
       transition: none;
     }
   }

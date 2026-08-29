@@ -4,8 +4,10 @@ import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import { defineConfig } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkGemoji from "remark-gemoji";
+import remarkMath from "remark-math";
 import rehypeBudoux from "./src/plugins/rehype-budoux";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -43,7 +45,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false,
     smartypants: false,
-    remarkPlugins: [remarkGemoji],
+    remarkPlugins: [remarkGemoji, remarkMath],
     remarkRehype: {
       footnoteLabel: " ",
       footnoteBackLabel: "↩ 戻る",
@@ -52,6 +54,7 @@ export default defineConfig({
     rehypePlugins: [
       rehypeSlug,
       rehypeBudoux,
+      rehypeKatex,
       [
         rehypeAutolinkHeadings,
         {

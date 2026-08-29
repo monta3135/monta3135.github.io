@@ -6,6 +6,7 @@
 /* Tailwind utilities (without preflight reset) */
 @import "tailwindcss/theme.css";
 @import "tailwindcss/utilities.css";
+@import "katex/dist/katex.min.css";
 
 /* --- Font imports (bundled, no external requests) --- */
 @import "./fonts.css";

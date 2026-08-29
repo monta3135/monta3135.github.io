@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" viewBox="0 0 88 31" shape-rendering="crispEdges">
+  <rect width="88" height="31" fill="#0e1822" />
+  <rect x="1" y="1" width="86" height="29" fill="#cdd6df" stroke="#f7fbff" />
+  <path d="M2 28h84v1H2z" fill="#526171" />
+  <path d="M2 2h84v2H2z" fill="#f8fbff" />
+  <path d="M3 5h82v1H3z" fill="#8b98a5" />
+  <rect x="4" y="7" width="28" height="18" rx="5" fill="#5d0d0c" />
+  <rect x="5" y="6" width="26" height="17" rx="5" fill="#c62b25" />
+  <path d="M6 7h24v2H6z" fill="#ed5b51" />
+  <path d="m15 10 10 5-10 5z" fill="#fffdf4" />
+  <path d="m15 10 10 5-10 1z" fill="#e6e8e8" />
+  <text x="35" y="18" fill="#141a20" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" letter-spacing="-0.7">YouTube</text>
+  <path d="M35 21h45v1H35z" fill="#9c2b27" />
+  <path d="M35 24h3v1h-3zm5 0h7v1h-7zm9 0h2v1h-2zm4 0h11v1H53z" fill="#687785" />
+  <path d="M82 7h1v2h-1zm-1 2h1v1h-1zM7 23h1v1H7z" fill="#6b7a88" />
+</svg>
