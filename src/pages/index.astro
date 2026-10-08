@@ -8,8 +8,12 @@ const birthDate = new Date("2005-02-10");
 
 const favoriteBooks = [
   {
-    title: "読書 — 西田幾多郎",
+    title: "西田幾多郎『読書』",
     href: "https://www.aozora.gr.jp/cards/000182/files/3505_53075.html",
+  },
+  {
+    title: "岡本太郎『青春ピカソ』",
+    href: "https://www.shinchosha.co.jp/book/134621/",
   },
 ];
 ---
@@ -43,7 +47,7 @@ const favoriteBooks = [
       </figure>
     </header>
 
-    <section class="profile-details" aria-labelledby="favorite-books-title">
+    <section class="favorite-books" aria-labelledby="favorite-books-title">
       <h2 id="favorite-books-title">Favorite Books</h2>
       <ul class="favorite-books-list">
         {
@@ -120,15 +124,12 @@ const favoriteBooks = [
     color: var(--accent);
     font-size: var(--text-base);
     font-weight: 700;
-    text-decoration-color: currentColor;
-    text-decoration-thickness: 1.5px;
-    text-underline-offset: 0.35em;
-    transition: color var(--transition), text-decoration-color var(--transition);
+    text-decoration: none;
+    transition: color var(--transition);
   }
 
   .profile-links a:hover {
     color: var(--accent-hover);
-    text-decoration-color: currentColor;
   }
 
   .profile-links a:focus-visible {
@@ -144,7 +145,6 @@ const favoriteBooks = [
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
-    border-bottom: 1px solid var(--border);
   }
 
   .profile-details {
@@ -164,35 +164,30 @@ const favoriteBooks = [
     letter-spacing: 0;
   }
 
+  .favorite-books {
+    margin-top: var(--spacing-3xl);
+  }
+
+  .favorite-books h2 {
+    margin: 0 0 var(--spacing-sm);
+    font-size: var(--text-lg);
+  }
+
   .favorite-books-list {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .favorite-books-list li {
-    padding-block: var(--spacing-sm) var(--spacing-md);
-    border-bottom: 1px solid var(--border);
-  }
-
   .favorite-books-list a {
-    color: var(--text);
-    font-size: var(--text-base);
-    font-weight: 500;
+    color: var(--accent);
     overflow-wrap: anywhere;
-    text-decoration-color: var(--border);
-    text-underline-offset: 0.35em;
-    transition: color var(--transition), text-decoration-color var(--transition);
+    text-decoration: none;
+    transition: color var(--transition);
   }
 
   .favorite-books-list a:hover {
-    color: var(--accent);
-    text-decoration-color: currentColor;
-  }
-
-  .favorite-books-list a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
+    color: var(--accent-hover);
   }
 
   .profile-links-section {
@@ -241,14 +236,6 @@ const favoriteBooks = [
     .profile-details {
       grid-template-columns: 1fr;
       gap: var(--spacing-lg);
-    }
-
-    .favorite-books-list li {
-      padding-block: var(--spacing-sm);
-    }
-
-    .favorite-books-list li:first-child {
-      border-top: 1px solid var(--border);
     }
 
     .profile-links-section {

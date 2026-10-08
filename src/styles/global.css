@@ -56,8 +56,8 @@
   --bg-secondary: #f5f5f4;
   --text: #1c1917;
   --text-muted: #78716c;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
+  --accent: #305CA9;
+  --accent-hover: #264A87;
   --border: #e7e5e4;
   --code-bg: #f8f8f8;
   --tag-bg: #e7e5e4;
@@ -65,22 +65,8 @@
 
   /* Transitions */
   --transition: 150ms ease;
-}
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0c0a09;
-    --bg-secondary: #1c1917;
-    --text: #fafaf9;
-    --text-muted: #a8a29e;
-    --accent: #60a5fa;
-    --accent-hover: #93c5fd;
-    --border: #292524;
-    --code-bg: #161412;
-    --tag-bg: #1c1917;
-    --tag-text: #d6d3d1;
-  }
+  color-scheme: light;
 }
 
 /* --- Reset / Base --- */
@@ -299,7 +285,7 @@ h4:hover .heading-link {
 }
 
 .tag:hover {
-  background-color: var(--accent);
+  background-color: #780099;
   color: #fff;
 }
 

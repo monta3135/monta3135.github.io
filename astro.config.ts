@@ -21,7 +21,7 @@ export default defineConfig({
 
   integrations: [
     expressiveCode({
-      themes: ["github-dark-default", "github-light-default"],
+      themes: ["github-light-default"],
       styleOverrides: {
         borderRadius: "0.25rem",
         borderColor: "var(--border)",

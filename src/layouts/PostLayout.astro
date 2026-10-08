@@ -99,7 +99,7 @@ const ogImageURL = new URL(
       </div>
 
       <footer class="post-footer">
-        <a href={`${import.meta.env.BASE_URL}`}>← 一覧へ戻る</a>
+        <a href={`${baseUrl}blog`}>← 一覧へ戻る</a>
       </footer>
     </article>
   </div>
@@ -236,9 +236,9 @@ const ogImageURL = new URL(
   .post-toc-inner[data-toc-mode="progress"] {
     border: 0;
     border-radius: 0;
-    background: transparent;
+    background: #000;
     box-shadow: none;
-    padding: 0.3rem 0;
+    padding: 1rem 1.25rem;
   }
 
   .toc-header {
@@ -250,7 +250,7 @@ const ogImageURL = new URL(
   }
 
   .toc-title {
-    color: var(--text);
+    color: #fff;
     font-size: 1.15rem;
     font-weight: 500;
     line-height: 1.25;
@@ -298,7 +298,7 @@ const ogImageURL = new URL(
     border: 0;
     border-radius: 0;
     background: transparent;
-    color: var(--accent);
+    color: #fff;
     font-size: 0.9rem;
     font-weight: 600;
     line-height: 1.45;
@@ -307,22 +307,18 @@ const ogImageURL = new URL(
   }
 
   .toc-list--progress .toc-link[data-toc-state="upcoming"] {
-    color: color-mix(in srgb, var(--accent) 42%, var(--bg));
+    color: #8c8c8c;
     opacity: 1;
   }
 
   .toc-list--progress .toc-link[data-toc-state="read"] {
-    color: var(--accent);
+    color: #fff;
     font-weight: 700;
   }
 
   .toc-list--progress .toc-link[aria-current="location"] {
-    color: var(--accent);
+    color: #fff;
     font-weight: 700;
-  }
-
-  .toc-list--progress .toc-link:hover {
-    color: color-mix(in srgb, var(--accent) 78%, var(--text));
   }
 
   .post-header {
@@ -380,7 +376,7 @@ const ogImageURL = new URL(
   }
 
   .post-footer a:hover {
-    color: var(--accent);
+    color: #780099;
   }
 
   @media (max-width: 1023px) {
@@ -476,7 +472,7 @@ const ogImageURL = new URL(
     }
 
     .post-toc-inner[data-toc-mode="progress"] {
-      padding-right: 0.25rem;
+      padding-right: 1.25rem;
     }
   }
 
@@ -498,7 +494,6 @@ const ogImageURL = new URL(
 
   @media (max-width: 1023px) {
     .post-toc-inner[data-toc-mode="progress"] {
-      border-bottom: 1px solid var(--border);
       padding-bottom: 1.25rem;
     }
 
